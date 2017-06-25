@@ -1,0 +1,57 @@
+//Digital-Clock-Java-
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class Clock extends Thread 
+{
+	int hr=0,min=0;
+	public void run() 
+	{
+		int i;
+		for(i=1;;i++)
+		{
+			try{
+			new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+			}catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+			catch(InterruptedException r)
+			{
+				r.printStackTrace();
+			}
+			System.out.println(hr+":"+min+":"+i);
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			if(i>=60)
+			{
+				i=i-60;
+				min++;
+				if(min>=60)
+				{
+					min-=60;
+					hr++;
+				}
+			}
+			if(hr>=24)
+			System.exit(0);
+			
+		}
+		
+	}
+}
+class Q3
+{
+	public static void main(String args[])
+	{
+		new Clock()
+		{}.start();
+		
+	}
+}
